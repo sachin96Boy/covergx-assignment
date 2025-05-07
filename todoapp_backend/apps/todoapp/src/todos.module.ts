@@ -2,10 +2,9 @@ import { Module } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { TodosController } from './todos.controller';
 import { LoggerModule } from 'nestjs-pino';
+import { DatabaseModule } from '@app/common';
 
 @Module({
-  controllers: [TodosController],
-  providers: [TodosService],
   imports: [
     LoggerModule.forRoot({
       pinoHttp: {
@@ -20,6 +19,9 @@ import { LoggerModule } from 'nestjs-pino';
         },
       },
     }),
+    DatabaseModule,
   ],
+  controllers: [TodosController],
+  providers: [TodosService],
 })
 export class TodosModule {}

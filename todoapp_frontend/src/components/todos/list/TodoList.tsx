@@ -19,7 +19,9 @@ function TodoList() {
   return (
     <Flex
       alignItems={"center"}
-      justifyContent={"center"}
+      justifyContent={"start"}
+      flexDirection={"column"}
+      gap={4}
       p={4}
       overflowY={"auto"}
       //   minH={"100vh"}

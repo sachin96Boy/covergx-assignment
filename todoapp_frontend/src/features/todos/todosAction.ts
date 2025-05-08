@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { axiosInstance } from "@/api-utils/axiosInstance";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type {  ICreatetodo, IUpdatetodo } from "./todosSlice";
+import type { ICreatetodo, IUpdatetodo } from "./todosSlice";
 
 const handleGetAllTodos = async ({ rejectWithValue }: any) => {
     try {
@@ -30,11 +30,12 @@ const handleCreateTodos = async (values: ICreatetodo, { rejectWithValue }: any) 
 const handleUpdateTodo = async (values: IUpdatetodo, { rejectWithValue }: any) => {
     try {
 
-        const response = await axiosInstance.put(`/todos/${values.id}`, values);
-
+        const response = await axiosInstance.patch(`/todos/${values.id}`, values);
+        console.log(response.data, 'response data from update todo')
         return response.data;
 
     } catch (err) {
+        console.log(err, 'error from update todo')
         return rejectWithValue(err)
     }
 }

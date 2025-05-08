@@ -1,11 +1,16 @@
+import { createTodo } from "@/features/todos/todosAction";
 import type { ICreatetodo } from "@/features/todos/todosSlice";
+import type { AppDispatch } from "@/store";
 import { Button, Field, Input, Stack, Textarea } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
 import * as yup from "yup";
 
 function TodoFormComponent() {
+  const dispatch = useDispatch<AppDispatch>();
+
   const initialValues: ICreatetodo = {
     title: "",
     description: "",
@@ -18,14 +23,14 @@ function TodoFormComponent() {
     completed: yup.boolean().defined().default(false),
   });
 
-  const handleDataSubmit = (values: ICreatetodo) => {
-    console.log(values);
+  const handleDataSubmit = async (values: ICreatetodo) => {
+    await dispatch(createTodo(values));
   };
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, touchedFields },
+    formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: initialValues,
     resolver: yupResolver(validationSchema),
@@ -41,14 +46,12 @@ function TodoFormComponent() {
   return (
     <form onSubmit={handleSubmit(handleDataSubmit)}>
       <Stack gap={4} align={"flex-start"} maxW={"sm"}>
-        <Field.Root invalid={!!errors.title || !!touchedFields.title}>
+        <Field.Root invalid={!!errors.title}>
           <Field.Label>Title</Field.Label>
           <Input {...register("title")} />
           <Field.ErrorText>{errors.title?.message}</Field.ErrorText>
         </Field.Root>
-        <Field.Root
-          invalid={!!errors.description || !!touchedFields.description}
-        >
+        <Field.Root invalid={!!errors.description}>
           <Field.Label>Description</Field.Label>
           <Textarea {...register("description")} />
           <Field.ErrorText>{errors.description?.message}</Field.ErrorText>

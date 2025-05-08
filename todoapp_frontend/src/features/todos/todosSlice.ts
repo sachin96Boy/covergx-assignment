@@ -7,6 +7,12 @@ export type ICreatetodo = {
     description: string;
     completed: boolean;
 }
+export type Itodo = {
+    id: number;
+    title: string;
+    content: string;
+    completed: boolean;
+}
 export type IUpdatetodo = {
     id: number;
     title: string;
@@ -16,7 +22,7 @@ export type IUpdatetodo = {
 
 export type IinitialState = {
     loading: boolean;
-    todos: IUpdatetodo[];
+    todos: Itodo[];
     error: boolean | null;
     success: boolean;
     message: string | null;
@@ -50,7 +56,7 @@ export const todosSlice = createSlice({
                 state.error = null;
                 state.success = true;
 
-                state.todos = action.payload.todos;
+                state.todos = action.payload;
             }
         ).addCase(
             getAlltodos.rejected,
@@ -77,7 +83,7 @@ export const todosSlice = createSlice({
                 state.error = null;
                 state.success = true;
 
-                state.todos = [...state.todos, action.payload.todo]
+                state.todos = [...state.todos, action.payload]
             }
         ).addCase(
             createTodo.rejected,
@@ -104,7 +110,7 @@ export const todosSlice = createSlice({
                 state.error = null;
                 state.success = true;
 
-                state.todos = state.todos.filter((todo) => todo.id !== action.payload.todo.id);
+                state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
             }
         ).addCase(
             updateTodo.rejected,

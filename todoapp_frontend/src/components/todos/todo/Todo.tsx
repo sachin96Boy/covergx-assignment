@@ -1,11 +1,11 @@
 import { updateTodo } from "@/features/todos/todosAction";
-import type { IUpdatetodo } from "@/features/todos/todosSlice";
+import type { Itodo } from "@/features/todos/todosSlice";
 import type { AppDispatch } from "@/store";
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 
 type ITodoProps = {
-  data: IUpdatetodo;
+  data: Itodo;
 };
 
 function Todo(props: ITodoProps) {
@@ -18,20 +18,28 @@ function Todo(props: ITodoProps) {
       updateTodo({
         id: data.id,
         title: data.title,
-        description: data.description,
+        description: data.content,
         completed: true,
       })
     );
   };
 
   return (
-    <Box maxW={400}>
-      <Box p={4} borderWidth={1} borderRadius="md" mb={2} bg={"gray.700"}>
-        <Box fontWeight="bold">{data.title}</Box>
-        <Flex>
-          <Box>{data.description}</Box>
+    <Box minW={"600px"}>
+      <Box p={4} borderWidth={1} borderRadius="md" mb={2} bg={"gray.200"}>
+        <Box fontWeight="bold">
+          <Heading>{data.title}</Heading>
+        </Box>
+        <Flex alignItems={"center"} justifyContent={"space-between"}>
+          <Box>{data.content}</Box>
           {!data.completed ? (
-            <Button colorScheme="blue" ml={2} onClick={handleComplete}>
+            <Button
+              colorPalette="black"
+              variant={"outline"}
+              outline={"1px solid black"}
+              ml={2}
+              onClick={handleComplete}
+            >
               Complete
             </Button>
           ) : (

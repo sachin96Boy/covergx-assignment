@@ -53,7 +53,12 @@ function TodoFormComponent() {
           <Textarea {...register("description")} />
           <Field.ErrorText>{errors.description?.message}</Field.ErrorText>
         </Field.Root>
-        <Button colorPalette={"blue"} loading={isSubmitting} type="submit">
+        <Button
+          alignSelf={"end"}
+          colorPalette={"blue"}
+          loading={isSubmitting}
+          type="submit"
+        >
           Submit
         </Button>
       </Stack>

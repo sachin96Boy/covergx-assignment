@@ -25,11 +25,14 @@ function TodoFormComponent() {
 
   const handleDataSubmit = async (values: ICreatetodo) => {
     await dispatch(createTodo(values));
+    reset(initialValues);
   };
 
   const {
     register,
     handleSubmit,
+    reset,
+
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: initialValues,

@@ -26,6 +26,10 @@ export class TodosService {
       where: {
         completed: false,
       },
+      take: 10,
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
   }
 

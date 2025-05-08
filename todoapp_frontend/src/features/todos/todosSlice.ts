@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
 import { createTodo, getAlltodos, updateTodo } from "./todosAction";
+import { toaster } from "@/components/ui/toaster";
 
 export type ICreatetodo = {
     title: string;
@@ -84,6 +85,12 @@ export const todosSlice = createSlice({
                 state.success = true;
 
                 state.todos = [...state.todos, action.payload]
+
+                toaster.create({
+                    type: 'success',
+                    title: 'Todo created successfully',
+
+                });
             }
         ).addCase(
             createTodo.rejected,
@@ -93,6 +100,12 @@ export const todosSlice = createSlice({
                 state.success = false;
 
                 state.message = (action.payload as any)?.message || 'Something went wrong!'
+
+                toaster.create({
+                    type: 'error',
+                    title: state.message || 'Something went wrong',
+
+                });
 
 
             }
@@ -111,6 +124,13 @@ export const todosSlice = createSlice({
                 state.success = true;
 
                 state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
+
+                toaster.create({
+                    type: 'success',
+                    title: 'Todo updated successfully',
+
+                });
+
             }
         ).addCase(
             updateTodo.rejected,
@@ -120,6 +140,13 @@ export const todosSlice = createSlice({
                 state.success = false;
 
                 state.message = (action.payload as any)?.message || 'Something went wrong!'
+
+                toaster.create({
+                    type: 'error',
+                    title: state.message || 'Something went wrong',
+
+                });
+
 
 
             }

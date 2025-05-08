@@ -48,7 +48,7 @@ function TodoFormComponent() {
 
   return (
     <form onSubmit={handleSubmit(handleDataSubmit)}>
-      <Stack gap={4} align={"flex-start"} maxW={"sm"}>
+      <Stack spaceY={4} align={"flex-start"} maxW={"lg"}>
         <Field.Root invalid={!!errors.title}>
           <Field.Label>Title</Field.Label>
           <Input {...register("title")} />

@@ -1,9 +1,10 @@
+import { getAlltodos } from "@/features/todos/todosAction";
 import type { AppDispatch, RootState } from "@/store";
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import Error from "@/utils/Error";
+import { Center, Flex, Spinner, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Todo from "../todo/Todo";
-import { useEffect } from "react";
-import { getAlltodos } from "@/features/todos/todosAction";
 
 function TodoList() {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,9 +28,11 @@ function TodoList() {
       //   minH={"100vh"}
     >
       {loading ? (
-        <Spinner />
+        <Center>
+          <Spinner />
+        </Center>
       ) : error ? (
-        <Text>{message}</Text>
+        <Error message={message} />
       ) : todos.length === 0 ? (
         <Text>No todos found</Text>
       ) : (

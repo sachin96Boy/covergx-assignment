@@ -7,7 +7,7 @@ function TodoPage() {
     <Box py={"12px"} width={"full"}>
       <Flex
         gap={2}
-        minH={"80vh"}
+        minH={"90vh"}
         divideX={"4px"}
         flexDirection={["column", "column", "row"]}
       >

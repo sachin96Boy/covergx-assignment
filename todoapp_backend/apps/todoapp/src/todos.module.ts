@@ -3,9 +3,14 @@ import { TodosService } from './todos.service';
 import { TodosController } from './todos.controller';
 import { LoggerModule } from 'nestjs-pino';
 import { DatabaseModule } from '@app/common';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
     LoggerModule.forRoot({
       pinoHttp: {
         transport: {

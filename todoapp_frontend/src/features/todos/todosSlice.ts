@@ -104,11 +104,7 @@ export const todosSlice = createSlice({
                 state.error = null;
                 state.success = true;
 
-                const index = state.todos.findIndex((todo) => todo.id === action.payload.todo.id)
-
-                if (index !== -1) {
-                    state.todos[index] = action.payload.todo
-                }
+                state.todos = state.todos.filter((todo) => todo.id !== action.payload.todo.id);
             }
         ).addCase(
             updateTodo.rejected,

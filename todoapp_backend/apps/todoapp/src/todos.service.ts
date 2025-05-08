@@ -22,7 +22,11 @@ export class TodosService {
   }
 
   findAll() {
-    return this.databaseService.todo.findMany();
+    return this.databaseService.todo.findMany({
+      where: {
+        completed: false,
+      },
+    });
   }
 
   findOne(id: number) {

@@ -31,7 +31,9 @@ function TodoList() {
       ) : todos.length === 0 ? (
         <Text>No todos found</Text>
       ) : (
-        todos.map((todo) => <Todo key={todo.id} data={todo} />)
+        todos.map((todo) => {
+          return <Todo key={todo.id} data={todo} />;
+        })
       )}
     </Flex>
   );

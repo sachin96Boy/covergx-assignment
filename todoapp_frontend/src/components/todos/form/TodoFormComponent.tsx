@@ -25,11 +25,7 @@ function TodoFormComponent() {
   const {
     register,
     handleSubmit,
-    formState: {
-      errors,
-      isSubmitting,
-      touchedFields,
-    },
+    formState: { errors, isSubmitting, touchedFields },
   } = useForm({
     defaultValues: initialValues,
     resolver: yupResolver(validationSchema),

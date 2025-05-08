@@ -1,14 +1,29 @@
-import type { RootState } from "@/store";
+import type { AppDispatch, RootState } from "@/store";
 import { Flex, Spinner, Text } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Todo from "../todo/Todo";
+import { useEffect } from "react";
+import { getAlltodos } from "@/features/todos/todosAction";
 
 function TodoList() {
+  const dispatch = useDispatch<AppDispatch>();
+
   const { loading, message, error, todos } = useSelector(
     (state: RootState) => state.todos
   );
+
+  useEffect(() => {
+    dispatch(getAlltodos({}));
+  }, [dispatch]);
+
   return (
-    <Flex alignItems={"center"} justifyContent={"center"} p={4}>
+    <Flex
+      alignItems={"center"}
+      justifyContent={"center"}
+      p={4}
+      overflowY={"auto"}
+      //   minH={"100vh"}
+    >
       {loading ? (
         <Spinner />
       ) : error ? (

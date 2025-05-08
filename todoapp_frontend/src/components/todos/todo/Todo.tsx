@@ -25,8 +25,8 @@ function Todo(props: ITodoProps) {
   };
 
   return (
-    <Box>
-      <Box p={4} borderWidth={1} borderRadius="md" mb={2}>
+    <Box maxW={400}>
+      <Box p={4} borderWidth={1} borderRadius="md" mb={2} bg={"gray.700"}>
         <Box fontWeight="bold">{data.title}</Box>
         <Flex>
           <Box>{data.description}</Box>

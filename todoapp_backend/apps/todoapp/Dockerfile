@@ -5,6 +5,7 @@
     
     # Copy package files
     COPY package.json pnpm-lock.yaml tsconfig.json nest-cli.json ./ 
+    COPY apps/todoapp/prisma ./prisma
 
     # Install pnpm globally
     RUN npm install -g pnpm
@@ -14,7 +15,9 @@
     
     
     # Install all dependencies (including dev)
-    RUN pnpm install
+    RUN pnpm 
+    
+    RUN pnpm prisma generate
     
     # Copy the rest of the app
     COPY . .
@@ -44,5 +47,5 @@
     COPY --from=development /usr/src/app/dist ./dist
     
     # Set the command to run the app
-    CMD ["node", "dist/apps/todoapp/main.js"]
+    CMD ["pnpm","run", "start:prod", "dist/apps/todoapp/main.js"]
     

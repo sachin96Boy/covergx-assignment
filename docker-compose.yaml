@@ -11,7 +11,11 @@ services:
       - todo_network
 
   backend:
-    build: ./todoapp_backend
+    build:
+      context: ./todoapp_backend
+      dockerfile: ./apps/todoapp/Dockerfile
+      target: development
+    command: sh -c "pnpm prisma migrate deploy && pnpm start:dev backend"
     env_file:
       - .env
     ports:
